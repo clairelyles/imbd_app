@@ -1,0 +1,24 @@
+<% include ../header %>
+
+<a href="javascript:history.back()">&larr; back</a><br><br>
+
+<h3>Search Results</h3>
+<br>
+<% for (var i = 0; i < Search.length; i++) { %>
+<div class='container search'>
+	<div class='row'>
+		<div class="col-xs-2 col-md-2 text-center" id="count1">
+			<img src="http://placekitten.com.s3.amazonaws.com/homepage-samples/96/139.jpg">
+		</div>
+		<div class="col-xs-1 col-md-1 text-center" id="count2">
+			<%= i + 1 %> 
+		</div>
+		<div class="col-xs-8 col-md-8" id="count3">
+			<a href='<%=Search[i].imdbID%>'><%= Search[i].Title %></a><br>
+			(<%= Search[i].Year %>)
+		</div>
+	</div>
+</div>
+	<% } %>
+
+<% include ../footer %>
