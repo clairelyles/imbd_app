@@ -41,11 +41,11 @@ app.post('/watchlist', function(req, res) {
 	var myObject = req.body;
 	//console.log(myObject);
 
-	db.Queue.findOrCreate({where: {imbd_code: req.body.imdb_code, title: req.body.title, year: req.body.year }}).done(function(err,data,noCreated) {
-		db.Queue.findAll().done(function(err, data2) {
+	db.Queue.findOrCreate({where: {imbd_code: req.body.imdb_code, title: req.body.title, year: req.body.year }}).done(function(err,data,Created) {
+		db.Queue.findAll({order:'id ASC'}).done(function(err, data2) {
 		// Q for class: why is the array ordered not according to db id#?
 		//res.send({dataArray:data2})
-		res.render("watchlist", {dataArray: data2, msg: "Your movie has been added!"})
+		res.render("watchlist", {dataArray: data2, msg: Created ? "Your movie has been added!" : "This movie has already been added!"})
 		})
 	})
 })
@@ -54,7 +54,7 @@ app.post('/watchlist', function(req, res) {
 
 app.get('/watchlist', function(req, res) {
 
-		db.Queue.findAll().done(function(err, data2) {
+		db.Queue.findAll({order:'id ASC'}).done(function(err, data2) {
 		// Q for class: why is the array ordered not according to db id#?
 		//res.send({dataArray:data2})
 		res.render("watchlist", {dataArray: data2})
