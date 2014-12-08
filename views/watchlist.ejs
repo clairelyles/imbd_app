@@ -1,0 +1,36 @@
+<% include /header %>
+
+<div class="container show">
+  <div class="row">
+    <div class="col-xs-12 col-md-12">
+      <h3 id="header">MOVIE QUEUE</h3>
+    </div>
+  </div>
+</div>
+
+<% for (var i = 0; i < dataArray.length; i++) { %>
+<div class="container search">
+ 	<div class="row">
+		<div class="col-xs-1 col-md-1 text-center" id="count1">
+			<img src="http://i.imgur.com/Y6hUaf6.png" height="35" width="49">
+		</div>
+		<div class="col-xs-1 col-md-1 text-center" id="count2">
+			<h3 id="header"><%= i + 1 %> </h3>
+		</div>
+		<div class="col-xs-8 col-md-8 text-center" id="count3">
+			<h3><a href="/<%= dataArray[i].imbd_code %>"><%= dataArray[i].title %></a></h3> (<%= dataArray[i].year %>)
+		</div>
+		<div class="col-xs-2 col-md-2 text-center" id="count4">
+			 <form action="/watchlist" method="post">
+              <input type="hidden" name="imdb_code" value="<%= dataArray[i].imbd_code %>">
+              <input type="hidden" name="title" value="<%= dataArray[i].title %>">
+              <input type="hidden" name="year" value="<%= dataArray[i].year %>">
+              <input type="submit" id="submit" value="x remove">
+            </form>
+		</div>
+		<br>
+	</div>
+</div>
+	<% } %>
+
+<% include /footer %>

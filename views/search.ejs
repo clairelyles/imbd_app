@@ -1,0 +1,27 @@
+<% include /header %>
+
+<div class="container show">
+	<div class="row">
+		<div class="col-xs-12 col-md-12">
+			<h3 id="header">SEARCH RESULTS</h3>
+		</div>
+	</div>
+</div>
+<br>
+<% for (var i = 0; i < Search.length; i++) { %>
+<div class='container search'>
+	<div class="row">
+		<div class="col-xs-1 col-md-1 text-center" id="count1">
+			<img src="http://i.imgur.com/Y6hUaf6.png" height="35" width="49">
+		</div>
+		<div class="col-xs-1 col-md-1 text-center" id="count2">
+			<h3 id="header"><%= i + 1 %> </h3>
+		</div>
+		<div class="col-xs-8 col-md-8" id="count3">
+			<h3><a href='<%=Search[i].imdbID%>'><%= Search[i].Title %></a></h3> (<%= Search[i].Year %>)
+		</div>
+	</div>
+</div>
+	<% } %>
+
+<% include /footer %>
