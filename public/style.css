@@ -1,9 +1,12 @@
 /* ------------------- Header Styles ------------------- */
 
-div {
-	/*border: 1px solid #000;*/
+.container {
+	max-width: 1000px;
 }
 
+.container {
+	max-width: 1200px;
+}
 
 h1 {
 	position: absolute;
@@ -11,7 +14,7 @@ h1 {
 	top: 210px;
 	left: 0px;
 	width: 100%;
-	font-size: 65px;
+	font-size: 10vmin;
 	font-style: bold;
 	font-family: 'Josefin Sans';
 	color: #000;
@@ -24,7 +27,7 @@ h2 {
 	top: 270px;
 	left: 0px;
 	width: 100%;
-	font-size: 18px;
+	font-size: 3vmin;
 	font-family: 'Merriweather';
 	color: #000;
 }
@@ -81,7 +84,7 @@ body {
 }
 
 .img-responsive {
-	padding-top: 20px;
+	padding-top: 30px;
 	position: relative;
 }
 
@@ -165,6 +168,21 @@ a:active {
 
 .show {	
 	padding-top: 20px;
+}
+
+/* ------------------- Watchlist Page ------------------- */
+
+.added {
+	width: 500px;
+	padding: 20px;
+	margin-left: 250px;
+	margin-top: 20px;
+	margin-bottom: 20px;
+	font-size: 20px;
+	background:#ccc; 
+	border:0 none;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
 }
 
 /* ------------------- Footer ------------------- */
