@@ -48,7 +48,7 @@ app.post('/:id', function(req, res) {
 	})
 })
 
-// ------------- ajax creates list of items in watchlist ------------- //
+// -------------  ajax creates list of items in watchlist ------------- //
 
 app.post('/watchlist', function(req, res) {
 
