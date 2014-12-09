@@ -185,6 +185,18 @@ a:active {
 	border-radius: 5px;
 }
 
+.deleteFavorite {
+	padding-top: 5px;
+	padding-left: 7px;
+	padding-right: 7px;
+	padding-bottom: 4px;
+	font-size: 12px;
+	background:#ccc; 
+	border:0 none;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+}
+
 /* ------------------- Footer ------------------- */
 
 .footer {

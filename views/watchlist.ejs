@@ -16,7 +16,7 @@
 
 
 <% for (var i = 0; i < dataArray.length; i++) { %>
-<div class="container search">
+<div class="container search deleteFavoriteWrapper">
  	<div class="row">
 		<div class="col-xs-1 col-md-1 text-center" id="count1">
 			<img src="http://i.imgur.com/Y6hUaf6.png" height="35" width="49">
@@ -28,14 +28,13 @@
 			<h3><a href="/<%= dataArray[i].imbd_code %>"><%= dataArray[i].title %></a></h3> (<%= dataArray[i].year %>)
 		</div>
 		<div class="col-xs-2 col-md-2 text-center" id="count4">
-			 <form action="/watchlist" method="post">
-              <input type="hidden" name="imdb_code" value="<%= dataArray[i].imbd_code %>">
-              <input type="submit" id="submit" value="x remove">
-            </form>
+              <a href="#" data-id="<%= dataArray[i].id %>" class="button deleteFavorite">x remove</a>
 		</div>
 		<br>
 	</div>
 </div>
 	<% } %>
 
+
 <% include /footer %>
+

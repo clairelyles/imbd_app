@@ -37,41 +37,35 @@ app.get('/search', function(req, res) {
 
 // ------------- posts to watch list & creates new row in db ------------- //
 
-app.post('/watchlist', function(req, res) {
-	var myObject = req.body;
-	//console.log(myObject);
+app.post('/:id', function(req, res) {
+	var myObject = req.body || false;
+	//res.render("watchlist" + false)
 
-	db.Queue.findOrCreate({where: {imbd_code: req.body.imdb_code, title: req.body.title, year: req.body.year }}).done(function(err,data,Created) {
-		db.Queue.findAll({order:'id ASC'}).done(function(err, data2) {
-		// Q for class: why is the array ordered not according to db id#?
-		//res.send({dataArray:data2})
-		res.render("watchlist", {dataArray: data2, msg: Created ? "Your movie has been added!" : "This movie has already been added!"})
-		})
+	db.Queue.findOrCreate({where: {imbd_code: req.body.imdb_code, title: req.body.title, year: req.body.year }}).then(function(err,data,Created) {
+		res.send({data: data})
+		}).catch(function(err) {
+			if (err) throw err;
 	})
 })
 
-// ------------- posts to watch list & creates new row in db ------------- //
+// ------------- ajax creates list of items in watchlist ------------- //
 
-app.get('/watchlist', function(req, res) {
+app.post('/watchlist', function(req, res) {
 
 		db.Queue.findAll({order:'id ASC'}).done(function(err, data2) {
-		// Q for class: why is the array ordered not according to db id#?
 		//res.send({dataArray:data2})
 		res.render("watchlist", {dataArray: data2})
 		})
 	})
 
-// ------------- not working: removes from watch list ------------- //
+// ------------- ajax removes from watch list ------------- //
 
-app.post('/watchlist', function(req, res) {
-	db.Queue.find({where: {imbd_code: req.body.imdb_code}}).then(function(Queue) {
-		Queue.destroy().success(function() {
-			res.redirect("/watchlist")
-		})
+app.delete('/watchlist/:id', function(req, res) {
+	db.Queue.destroy({where:{id: req.params.id}}).then(function(deleteCount) {
+		res.send({deleted: deleteCount})
 	})
 })
 
-// last step: how do I link to the queue list? Unable to do the app.get since we're not sending anything over from the hidden input form fields?
 
 // ------------- renders show page ------------- //
 
