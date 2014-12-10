@@ -18,15 +18,14 @@
         <h3>Genre:</h3> <%= movieItem.Genre %>
         <h3>Rotten Tomatoes:</h3> <%= movieItem.tomatoMeter %>
       </div>
-      <div class="col-xs-6 col-md-6 ">
-        <h3>Watch List:</h3>
-            <div class="addButtonWrapper">
-              <% if (movieFound) { %>
-              <type="submit" data-title="<%= movieItem.Title %>" data-year="<%= movieItem.Year %>" data-imbd_code="<%= movieItem.imdbID %>" id="submit" >+ added</a>
-              <% } else { %>
-              <a href="#" type="submit" class="addFavorite" data-title="<%= movieItem.Title %>" data-year="<%= movieItem.Year %>" data-imbd_code="<%= movieItem.imdbID %>" id="submit" >+ add</a>
-              <% } %>
-            </div>
+      <div class="col-xs-6 col-md-6">
+              <div class="addButtonWrapper">
+                <% if (movieFound) { %>
+                <a href="javascript:void(0);" type="submit" data-title="<%= movieItem.Title %>" data-year="<%= movieItem.Year %>" data-imbd_code="<%= movieItem.imdbID %>" id="submit" value="">+ added</a>
+                <% } else { %>
+                <a href="#" type="submit" class="addFavorite" data-title="<%= movieItem.Title %>" data-year="<%= movieItem.Year %>" data-imbd_code="<%= movieItem.imdbID %>" id="submit" >+ queue</a>
+                <% } %>
+          </div>
         <h3>Rating:</h3> <%= movieItem.Rated %>
         <h3>Runtime:</h3> <%= movieItem.Runtime %>
       </div>

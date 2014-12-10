@@ -1,17 +1,18 @@
 "use strict";
 
 module.exports = function(sequelize, DataTypes) {
-  var Queue = sequelize.define("Queue", {
+  var queue = sequelize.define("queue", {
     imbd_code: DataTypes.STRING,
     title: DataTypes.STRING,
     year: DataTypes.STRING
   }, {
     classMethods: {
       associate: function(models) {
-        // associations can be defined here
+        // queue item HAS MANY comments
+        models.queue.hasMany(models.final)
       }
     }
   });
 
-  return Queue;
+  return queue;
 };

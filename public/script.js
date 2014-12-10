@@ -46,4 +46,14 @@ $(function() {
 			alert("It's been added!");
 		})
 	})
+
+// ---------------------- Ajax Comment Button ---------------------- //
+
+	// $('.addComment').click(function(event) {
+	// 	// console.log($(this));
+	// 	console.log("Clicked the comment button")
+	// 	alert("Clicked!")
+	// 	event.preventDefault();
+	// })
+
 })

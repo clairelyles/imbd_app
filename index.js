@@ -41,31 +41,59 @@ app.post('/:id', function(req, res) {
 	var myObject = req.body || false;
 	//res.render("watchlist" + false)
 
-	db.Queue.findOrCreate({where: {imbd_code: req.body.imdb_code, title: req.body.title, year: req.body.year }}).then(function(err,data,Created) {
+	db.queue.findOrCreate({where: {imbd_code: req.body.imdb_code, title: req.body.title, year: req.body.year }}).then(function(err,data,Created) {
 		res.send({data: data})
 		}).catch(function(err) {
 			if (err) throw err;
 	})
 })
 
+
 // -------------  ajax creates list of items in watchlist ------------- //
 
 app.get('/watchlist', function(req, res) {
 
-		db.Queue.findAll({order:'id ASC'}).done(function(err, data2) {
+		db.queue.findAll({order:'id ASC'}).done(function(err, data2) {
 		//res.send({dataArray:data2})
 		res.render("watchlist", {dataArray: data2})
 		})
 	})
 
-// ------------- ajax removes from watch list ------------- //
 
-app.delete('/watchlist/:id', function(req, res) {
-	db.Queue.destroy({where:{id: req.params.id}}).then(function(deleteCount) {
-		res.send({deleted: deleteCount})
+// ------------- Comment button post ------------- //
+
+// goal is to create a route that redirects you to /comment page  
+app.post("/watchlist/:id/comments", function(req, res) {
+	// res.send(req.body.comment);
+	db.queue.find({where: {id: req.params.id}}).then(function(movieData) {
+		movieData.createFinal({content: req.body.content}).then(function(theComment) {
+			res.redirect("comments");
+		})
 	})
 })
 
+
+// ------------- Renders comment page from show page ------------- //
+
+// goal is to create a route that redirects you to /comment page  
+app.get("/watchlist/:id/comments", function(req,res) {
+	var queue_id = req.params.id;
+	db.final.findAll({where: {"queueId": queue_id}}).then(function(returnedMovie) {
+		// returns an array named returnedMovie
+		// res.send({returnedMovie: returnedMovie})
+		res.render("comments", {"queueId": queue_id, "returnedMovie":returnedMovie})
+	})
+})
+
+
+
+// ------------- ajax removes from watch list ------------- //
+
+app.delete('/watchlist/:id', function(req, res) {
+	db.queue.destroy({where:{id: req.params.id}}).then(function(deleteCount) {
+		res.send({deleted: deleteCount})
+	})
+})
 
 // ------------- renders show page ------------- //
 
@@ -76,7 +104,7 @@ app.get('/:imdbID', function(req, res) {
 		if (!error && response.statusCode == 200) {
 			var movieItem = JSON.parse(body);
 			//res.send(movieItem)
-			db.Queue.count({where: {imbd_code:movieItem.imdbID}}).then(function(foundItemCount) {
+			db.queue.count({where: {imbd_code:movieItem.imdbID}}).then(function(foundItemCount) {
 				// 
 				var wasFound = foundItemCount > 0;
 				var locals = {

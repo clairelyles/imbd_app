@@ -1,0 +1,27 @@
+<% include /header %>
+
+<div class="show">
+	<h3>Comment form here.....</h3>	
+	<form action='/watchlist/<%= queueId %>/comments' method='post'>	
+		<input type="text" name="content">
+		<input type="submit" class="addComment" value="Comment!">
+	</form>
+</div>
+
+<% for (var i = 0; i < returnedMovie.length; i++) { %>
+<div class='container search'>
+	<div class="row">
+		<div class="col-xs-1 col-md-1 text-center" id="count1">
+			<img src="http://i.imgur.com/Y6hUaf6.png" height="35" width="49">
+		</div>
+		<div class="col-xs-1 col-md-1 text-center" id="count2">
+			<h3 id="header"><%= i + 1 %> </h3>
+		</div>
+		<div class="col-xs-8 col-md-8" id="count3">
+			<h3>Comment:</h3><%= returnedMovie[i].content %>
+		</div>
+	</div>
+</div>
+	<% } %>
+
+<% include /footer %>

@@ -102,7 +102,7 @@ body {
 	border-radius: 5px;
 }
 
-#submit {
+a#submit {
 	padding-top: 5px;
 	padding-left: 7px;
 	padding-right: 7px;
@@ -112,7 +112,11 @@ body {
 	border:0 none;
 	-webkit-border-radius: 5px;
 	border-radius: 5px;
+/*	margin-bottom: 2px;*/
 }
+
+
+
 
 
 /* ------------------- Links ------------------- */

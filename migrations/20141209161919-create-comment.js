@@ -1,20 +1,14 @@
 "use strict";
 module.exports = {
   up: function(migration, DataTypes, done) {
-    migration.createTable("queues", {
+    migration.createTable("comments", {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: DataTypes.INTEGER
       },
-      imbd_code: {
-        type: DataTypes.STRING
-      },
-      title: {
-        type: DataTypes.STRING
-      },
-      year: {
+      content: {
         type: DataTypes.STRING
       },
       createdAt: {
@@ -28,6 +22,6 @@ module.exports = {
     }).done(done);
   },
   down: function(migration, DataTypes, done) {
-    migration.dropTable("queues").done(done);
+    migration.dropTable("comments").done(done);
   }
 };
