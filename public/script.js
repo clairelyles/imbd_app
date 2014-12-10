@@ -29,9 +29,9 @@ $(function() {
 		event.preventDefault();
 
 		var thisAddButton = $(this);
-		var addButtonImbd = $(this).data("imbd_code");
-		var addButtonTitle = $(this).data("title");
-		var addButtonYear = $(this).data("year");
+		var addButtonImbd = thisAddButton.data("imbd_code");
+		var addButtonTitle = thisAddButton.data("title");
+		var addButtonYear = thisAddButton.data("year");
 
 		console.log(addButtonImbd);
 		console.log(addButtonTitle);

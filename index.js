@@ -50,7 +50,7 @@ app.post('/:id', function(req, res) {
 
 // -------------  ajax creates list of items in watchlist ------------- //
 
-app.post('/watchlist', function(req, res) {
+app.get('/watchlist', function(req, res) {
 
 		db.Queue.findAll({order:'id ASC'}).done(function(err, data2) {
 		//res.send({dataArray:data2})
@@ -74,12 +74,19 @@ app.get('/:imdbID', function(req, res) {
 
 	request("http://www.omdbapi.com/?i=" + movieId + "&tomatoes=true&", function (error, response, body) {
 		if (!error && response.statusCode == 200) {
-			var stuff = JSON.parse(body);
-			//res.send(stuff)
-			//console.log(stuff)
-			res.render('show', stuff)
+			var movieItem = JSON.parse(body);
+			//res.send(movieItem)
+			db.Queue.count({where: {imbd_code:movieItem.imdbID}}).then(function(foundItemCount) {
+				// 
+				var wasFound = foundItemCount > 0;
+				var locals = {
+					movieFound: wasFound,
+					movieItem: movieItem,
+				}
+				res.render('show', locals);
+				})
   		} else {
-      // res.render("errorPage")
+      	// res.render("errorPage")
       	console.log("ERRR000R");
   		}
 	})

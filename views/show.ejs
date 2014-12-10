@@ -10,29 +10,30 @@
 <div class="container show">
   <div class="row">
     <!--     <div class="col-xs-6 col-md-3"></div> -->
-    <div class="col-xs-4 col-md-4"><img src="<%= Poster %>" class='img-responsive img-rounded'></div>
+    <div class="col-xs-4 col-md-4"><img src="<%= movieItem.Poster %>" class='img-responsive img-rounded'></div>
     <div class="col-xs-8 col-md-8">
       <div class="row">
        <div class="col-xs-6 col-md-6">
-        <h3>Title:</h3> <%= Title %>
-        <h3>Genre:</h3> <%= Genre %>
-        <h3>Rotten Tomatoes:</h3> <%= tomatoMeter %>
+        <h3>Title:</h3> <%= movieItem.Title %>
+        <h3>Genre:</h3> <%= movieItem.Genre %>
+        <h3>Rotten Tomatoes:</h3> <%= movieItem.tomatoMeter %>
       </div>
       <div class="col-xs-6 col-md-6 ">
         <h3>Watch List:</h3>
             <div class="addButtonWrapper">
-              <input type="hidden" name="imdb_code" value="<%= imdbID %>">
-              <input type="hidden" name="title" value="<%= Title %>">
-              <input type="hidden" name="year" value="<%= Year %>">
-              <a href="#" type="submit" class="addFavorite" data-title="<%= Title %>" data-year="<%= Year %>" data-imbd_code="<%= imdbID %>" id="submit" >+ add</a>
+              <% if (movieFound) { %>
+              <type="submit" data-title="<%= movieItem.Title %>" data-year="<%= movieItem.Year %>" data-imbd_code="<%= movieItem.imdbID %>" id="submit" >+ added</a>
+              <% } else { %>
+              <a href="#" type="submit" class="addFavorite" data-title="<%= movieItem.Title %>" data-year="<%= movieItem.Year %>" data-imbd_code="<%= movieItem.imdbID %>" id="submit" >+ add</a>
+              <% } %>
             </div>
-        <h3>Rating:</h3> <%= Rated %>
-        <h3>Runtime:</h3> <%= Runtime %>
+        <h3>Rating:</h3> <%= movieItem.Rated %>
+        <h3>Runtime:</h3> <%= movieItem.Runtime %>
       </div>
     </div>
     <div class="row">
      <div class="col-xs-10 col-md-10">
-      <h3>Plot:</h3> <%= Plot %>
+      <h3>Plot:</h3> <%= movieItem.Plot %>
     </div>
   </div>
 </div>
