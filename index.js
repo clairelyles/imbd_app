@@ -1,14 +1,22 @@
 var express = require('express');
 var bodyParser = require('body-parser');
-var db = require("./models/index.js");
 var request = require('request');
-var app = express();
 var methodOverride = require('method-override');
+var flash = require('connect-flash');
+var app = express();
 
-app.use(methodOverride('X-HTTP-Method-Override'));
+var db = require("./models/index.js");
+
+// install express session from npm
+// https://www.npmjs.com/package/express-session
+// set the session with app.use(session......)
+// in the route add:
+// req.session.lastPage = "/search?title="+searchRes <-- which came from the search term the user initially searches with
+
 app.set('view engine', 'ejs');
-app.use(bodyParser.urlencoded({extended: false}));
 app.use(express.static(__dirname + "/public"));
+app.use(methodOverride('X-HTTP-Method-Override'));
+app.use(bodyParser.urlencoded({extended: false}));
 
 
 // ------------- renders index ------------- //
@@ -78,10 +86,12 @@ app.post("/watchlist/:id/comments", function(req, res) {
 // goal is to create a route that redirects you to /comment page  
 app.get("/watchlist/:id/comments", function(req,res) {
 	var queue_id = req.params.id;
-	db.final.findAll({where: {"queueId": queue_id}}).then(function(returnedMovie) {
-		// returns an array named returnedMovie
-		// res.send({returnedMovie: returnedMovie})
-		res.render("comments", {"queueId": queue_id, "returnedMovie":returnedMovie})
+	db.queue.find({where: {"id":queue_id}}).then(function(queueMovie) {
+		db.final.findAll({where: {"queueId": queue_id}}).then(function(returnedMovie) {
+			// res.send(queueMovie)
+			// res.send({returnedMovie:returnedMovie, queue_id:queue_id})
+			res.render("comments", {"queueId": queue_id, "returnedMovie":returnedMovie, "queueMovie":queueMovie})
+		})
 	})
 })
 

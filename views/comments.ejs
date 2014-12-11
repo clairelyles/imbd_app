@@ -1,13 +1,13 @@
 <% include /header %>
 
 <div class="show">
-	<h3>Comment form here.....</h3>	
+	<h3 id="header">COMMENT HERE:</h3>	
 	<form action='/watchlist/<%= queueId %>/comments' method='post'>	
 		<input type="text" name="content">
 		<input type="submit" class="addComment" value="Comment!">
 	</form>
 </div>
-
+	<h3><%= queueMovie.title %> Comments</h3>
 <% for (var i = 0; i < returnedMovie.length; i++) { %>
 <div class='container search'>
 	<div class="row">
@@ -18,7 +18,7 @@
 			<h3 id="header"><%= i + 1 %> </h3>
 		</div>
 		<div class="col-xs-8 col-md-8" id="count3">
-			<h3>Comment:</h3><%= returnedMovie[i].content %>
+			<h3><%= returnedMovie[i].content %></h3>
 		</div>
 	</div>
 </div>
